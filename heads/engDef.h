@@ -5,20 +5,35 @@
 #include <allegro5/allegro_primitives.h>
 
 namespace gen {
-  void init();
-  void lp();
-  void close(); };
+  bool init();
+  bool lp();
+  bool close(); };
   
 namespace gfx {
-  void init();
-  void lp(); };
 
-namespace inpt {
-  void init();
-  void lp(); };
+  bool flip;
+
+  ALLEGRO_DISPLAY* d;
+  ALLEGRO_FONT* f;
+
+  bool init();
+  bool lp();
+  bool close(); };
+
+namespace events {
+
+  ALLEGRO_EVENT e;
+  
+  ALLEGRO TIMER* t;
+  ALLEGRO_EVENT_QUEUE* q;
+  
+  bool init();
+  bool lp();
+  bool close(); };
 
 namespace snd() {
-  void init(); };
+  bool init(); };
 
 namespace err {
-  void chck(const char* str, bool itm,...); };
+  bool  chck(bool itm,...);
+  void fPrint(const char* str); };
