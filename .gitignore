@@ -1,0 +1,4 @@
+include/*
+lib/*
+*.dll
+*.exe
