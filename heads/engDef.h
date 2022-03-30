@@ -4,40 +4,35 @@
 #include <allegro5/allegro_font.h>
 #include <allegro5/allegro_primitives.h>
 
-namespace gen {
-  bool init();
-  bool lp();
-  bool close(); };
+//General
+bool geninit();
+bool genlp();
+bool genclose(); 
   
-namespace gfx {
+//Graphics
+bool flip;
 
-  bool flip;
+ALLEGRO_DISPLAY* d;
+ALLEGRO_FONT* f;
 
-  ALLEGRO_DISPLAY* d;
-  ALLEGRO_FONT* f;
+bool gfxinit();
+bool gfxlp();
+bool gfxclose(); 
 
-  bool init();
-  bool lp();
-  bool close(); };
-
-namespace events {
-
-  ALLEGRO_EVENT e;
+//Evemts
+ALLEGRO_EVENT e;
   
-  ALLEGRO TIMER* t;
-  ALLEGRO_EVENT_QUEUE* q;
+ALLEGRO_TIMER* t;
+ALLEGRO_EVENT_QUEUE* q;
   
-  bool init();
-  bool lp();
-  bool close(); };
+bool evntinit();
+bool evntlp();
+bool evntclose(); 
 
-namespace snd() {
-  bool init(); };
+//Error Handling
+short numLog;
 
-namespace err {
-  short numLog;
-
-  bool init(const char* str); 
-  bool  chck(bool itm,...);
-  bool  fPrint(const char* str); };
+bool errinit(); 
+bool  errchck(bool itm,...);
+bool  errFPrint(const char* str);
   

@@ -1,93 +1,82 @@
 #include "engDef.h"
 
-bool gen::init(){
-  return err::chck(
+bool geninit(){
+  if(!errinit())
+    { return false; };
+
+  return errchck(
     al_init(),
-    err::init(),
-    gfx::init(), 
-    events::init(),
-    snd::init() ); };
+    evntinit(),
+    gfxinit() ); };
     
-bool gfx::init() {
-  err::fPrint("Initializing Graphics - File: Init.c");
+bool gfxinit() {
+  errFPrint("Initializing Graphics - File: Init.c");
 
   al_set_new_display_option(ALLEGRO_SAMPLE_BUFFERS, 
     1, ALLEGRO_SUGGEST);
   al_set_new_display_option(ALLEGRO_SAMPLES,
     8, ALLEGRO_SUGGEST); 
-  al_set_new_bipmap_flags(ALLEGRO_MIN_LINEAR | 
+  al_set_new_bitmap_flags(ALLEGRO_MIN_LINEAR | 
     ALLEGRO_MAG_LINEAR | ALLEGRO_MIPMAP);
 
   d = al_create_display(680, 400);
-  f = al_create_font();
+  f = al_create_builtin_font();
 
-  return err::chck(
+  return errchck(
     d, f,
-    al_init_primitives_addion() };
+    al_init_primitives_addon()); };
     
-bool events::init() {
-  err::fPrint("Initializing Events - File: Init.c");
+bool evntinit() {
+  errFPrint("Initializing Events - File: Init.c");
   
   t = al_create_timer(1.0/60.0);
   q = al_create_event_queue();
 
-  if (err::chck(
-    t, q,
-    al_install_keyboard()); ) {
+  if (errchck(
+       al_install_keyboard(), t, q )) {
       al_register_event_source(q, al_get_keyboard_event_source());
-      al_register_event_source(q, al_get_display_event_source(gfx::d));
+      al_register_event_source(q, al_get_display_event_source(d));
       al_register_event_source(q, al_get_timer_event_source(t));
     
       al_start_timer(t);
       
-      return true; 
-  else
+      return true; }
+  else 
     return false; };
     
-bool err::init(){
+bool errinit(){
   const char* file  = "temp.txt";
-  
-  unsigned char* cmd = 
-    (char* )malloc(sizeof(char)
-    *(20);
-   
-  strcpy(cmd, "cd txt");  
-  system( cmd );
-  
-  strcpy(cmd, "dir /b >> ");
+     
+  char* cmd = 
+    ( char* )malloc(sizeof(char*)
+    *(20 + sizeof(file)));
+     
+  strcpy(cmd, "cd txt & dir /b >> ");
   strcat(cmd, file);
-  system( cmd );
-  
-  FILE* fp = fopen(file, "r");
+  system( cmd ); 
+   
+  strcpy(cmd, "/txt/");
+  strcat(cmd, file);
+  printf(cmd);
+    
+  FILE* fp = fopen(cmd, "r");
   char c;
   short count;
     
-  if(fp){
-    do {
+  if(!fp){
     c = fgetc(fp);
     count = 0;
     numLog = -1;
     
-      if(c == 'L'){
-        fclose(fp);
-      
-        strcpy(cmd, "del ");
-        strcat(cmd, file);
-        system( cmd );
-        
-        strcpy(cmd, "md txt");
-        system( cmd );
-        
-        free(cmd);
-        return err::init() }; }
     while (c != EOF){
       if (count == 6){
-        numLog = atoi(c);
-        if (c == x) { break;}
-        if (numLog == 0 || 9) { break;} };
+        numLog = (short)c;
+        
+        if (c == 'x') { break;};
+        if (numLog == 0 || 9) { break;}; };
     
       if (count == 12) 
-        { count = 0; }
+        { count = 0; };
       
       count++;
       c = fgetc(fp); };    
@@ -97,11 +86,10 @@ bool err::init(){
      case 'x':
      case EOF:{
        strcpy(cmd, "del ");  
-       strcat(cmd, temp);  
+       strcat(cmd, file);  
        system( cmd );
        
-       free(cmd);
-       return err::fPrint(); }
+       free(cmd); }
      break;
      case '9': 
      default: { 
@@ -115,10 +103,21 @@ bool err::init(){
         system( cmd );
         
         free(cmd);  
-        return err::init(); }
+        return errinit(); }
       break; }; }
   else {
-    printf("TEMPORARY FILE FAILURE OPENING"); };
+    if(c == 'L'){
+      fclose(fp);
+      
+      strcpy(cmd, "del ");
+      strcat(cmd, file);
+      system( cmd );
+        
+      strcpy(cmd, "md txt");
+      system( cmd );
+        
+      free(cmd);
+      return errinit(); }; };
     
   return false; };  
 

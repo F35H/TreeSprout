@@ -1,17 +1,17 @@
-#import "engDef.h"
+#include "engDef.h"
 
-bool gen::close() {
-  return err::chck(
-    gfx::close(),
-    events::close() ); };
+bool genclose() {
+  return errchck(
+    gfxclose(),
+    evntclose() ); };
     
-bool gfx::close(){
+bool gfxclose(){
   al_destroy_font(f);
   al_destroy_display(d);
   
   return true; };
   
-  bool events::close(){
+  bool evntclose(){
     al_destroy_timer(t);
     al_destroy_event_queue(q);
     

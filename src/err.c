@@ -1,40 +1,45 @@
 #include "engDef.h"
 
-bool err:chck(bool itm,..){
+bool errchck(bool itm,...){
   va_list vlist;
   va_start(vlist, itm);
   
-  for(short i; i < itm; i++){ 
-    if(!va_arg(vlist, bool)){
-    err:fPrint("ERROR: Check last Callback!");
+  for(short i = 0; i < itm; i++){ 
+    if(!va_arg(vlist, int)){
+    errFPrint("ERROR: Check last Callback!");
     return false; } };
     
   return true; };
 
-bool fPrint(const char* str){
+bool errFPrint(const char* str){
+  time_t t = time(NULL);
   const char* tm = 
-    asctime(gmtime(time(NULL)));
+    asctime(gmtime(&t));
   
-  unsigned char* file = 
+   char* file = 
     (char* )malloc(sizeof(char)
-    *(12);
-  unsigned char* strng = 
+    *(12));
+   char* strng = 
     (char* )malloc(sizeof(char)
-    *(sizeof(tm) + sizeof(str) + 1;
+    *(sizeof(tm) + sizeof(str) + 2));
       
   strcpy(file, "errLog");
-  strcat(file, numLog);
+  sprintf(file, "%d", numLog);
   strcat(file, ".txt");
   
   strcpy(strng, tm);
   strcpy(strng, " ");
   strcat(strng, str);
+  strcat(strng, "\n");
       
   FILE* fp = fopen(file, "a");
   
-  if (fp) { puts(fp, strng); }
+  if (fp) { fputs(strng, fp); }
   else { return false; };   
   
   fclose(fp);
+  
+  free(file);
+  free(strng);
   return true; };         
 
