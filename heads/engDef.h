@@ -35,5 +35,9 @@ namespace snd() {
   bool init(); };
 
 namespace err {
+  short numLog;
+
+  bool init(const char* str); 
   bool  chck(bool itm,...);
-  void fPrint(const char* str); };
+  bool  fPrint(const char* str); };
+  

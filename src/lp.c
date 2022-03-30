@@ -1,11 +1,11 @@
 #include "engDef.h"
 
 bool gen::lp(){
-  while(
-    err::chck(
-      events::lp(),
-      gfx::lp() ); );    
-  return false;
+  if (err::chck(
+  events::lp(),
+  gfx::lp() )
+    { lp(); };
+  else{ return false; };
   
   wBreak: return true; };
 
@@ -38,8 +38,8 @@ bool gfx::lp(){
     
     al_flip_display();
     
-    flip  = false; };
+    flip  = false; 
     
-  return true;  
+  return true; };
   
     

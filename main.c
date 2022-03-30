@@ -10,6 +10,5 @@ int main (){
   else 
   { return 0; } };
 
-// Finish Err Print
-// Add Err Print to Appropriate Functions
-// Test
+
+//Place Emergency Window in Err::Check!
