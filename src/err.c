@@ -18,28 +18,28 @@ bool errFPrint(const char* str){
   
    char* file = 
     (char* )malloc(sizeof(char)
-    *(12));
+    *(13));
    char* strng = 
     (char* )malloc(sizeof(char)
-    *(sizeof(tm) + sizeof(str) + 2));
-      
-  strcpy(file, "errLog");
-  sprintf(file, "%d", numLog);
+    *(strlen(tm) + strlen(str) + 6));
+    
+  sprintf(file, "%d", numLog);    
+  strcat(file, "errLog");
   strcat(file, ".txt");
   
   strcpy(strng, tm);
-  strcpy(strng, " ");
+  strcat(strng, " ");
   strcat(strng, str);
-  strcat(strng, "\n");
+  strcat(strng, "\n \0");
       
   FILE* fp = fopen(file, "a");
   
-  if (fp) { fputs(strng, fp); }
-  else { return false; };   
-  
-  fclose(fp);
-  
+  if (!fp) { return false; }
+  else { fputs(strng, fp); };   
+   
   free(file);
   free(strng);
+  
+  fclose(fp);
   return true; };         
 

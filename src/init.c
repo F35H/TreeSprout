@@ -6,8 +6,8 @@ bool geninit(){
 
   return errchck(
     al_init(),
-    evntinit(),
-    gfxinit() ); };
+    gfxinit(),
+    evntinit() ); };
     
 bool gfxinit() {
   errFPrint("Initializing Graphics - File: Init.c");
@@ -17,14 +17,16 @@ bool gfxinit() {
   al_set_new_display_option(ALLEGRO_SAMPLES,
     8, ALLEGRO_SUGGEST); 
   al_set_new_bitmap_flags(ALLEGRO_MIN_LINEAR | 
-    ALLEGRO_MAG_LINEAR | ALLEGRO_MIPMAP);
+    ALLEGRO_MAG_LINEAR);
 
   d = al_create_display(680, 400);
   f = al_create_builtin_font();
-
+  
+/*
   return errchck(
     d, f,
-    al_init_primitives_addon()); };
+    al_init_primitives_addon()); */};
+    
     
 bool evntinit() {
   errFPrint("Initializing Events - File: Init.c");
@@ -33,14 +35,17 @@ bool evntinit() {
   q = al_create_event_queue();
 
   if (errchck(
-       al_install_keyboard(), t, q )) {
-      al_register_event_source(q, al_get_keyboard_event_source());
-      al_register_event_source(q, al_get_display_event_source(d));
-      al_register_event_source(q, al_get_timer_event_source(t));
+  al_install_keyboard(), t, q )) {
+    al_register_event_source(
+      q, al_get_keyboard_event_source());
+    al_register_event_source(
+      q, al_get_display_event_source(d));
+    al_register_event_source(
+      q, al_get_timer_event_source(t));
     
-      al_start_timer(t);
+    al_start_timer(t);
       
-      return true; }
+    return true; }
   else 
     return false; };
     
@@ -49,77 +54,34 @@ bool errinit(){
      
   char* cmd = 
     ( char* )malloc(sizeof(char*)
-    *(20 + sizeof(file)));
+    *(25 + sizeof(file)));
      
-  strcpy(cmd, "cd txt & dir /b >> ");
+  strcpy(cmd, "cd.. & md txt");
+  system( cmd );
+  
+  strcpy(cmd, 
+    "cd.. & dir txt /b >> bin/");
   strcat(cmd, file);
   system( cmd ); 
-   
-  strcpy(cmd, "/txt/");
-  strcat(cmd, file);
-  printf(cmd);
-    
-  FILE* fp = fopen(cmd, "r");
-  char c;
-  short count;
-    
-  if(!fp){
-    c = fgetc(fp);
-    count = 0;
-    numLog = -1;
-    
-    while (c != EOF){
-      if (count == 6){
-        numLog = (short)c;
-        
-        if (c == 'x') { break;};
-        if (numLog == 0 || 9) { break;}; };
-    
-      if (count == 12) 
-        { count = 0; };
-      
-      count++;
-      c = fgetc(fp); };    
-    fclose(fp);
-     
-    switch(c){
-     case 'x':
-     case EOF:{
-       strcpy(cmd, "del ");  
-       strcat(cmd, file);  
-       system( cmd );
-       
-       free(cmd); }
-     break;
-     case '9': 
-     default: { 
-        strcpy(cmd, "cd..");
-        system( cmd );
-
-        strcpy(cmd, "del txt");
-        system( cmd );
-          
-        strcpy(cmd, "Y");
-        system( cmd );
-        
-        free(cmd);  
-        return errinit(); }
-      break; }; }
+  
+  FILE* fp = fopen(file, "r");
+  int c = fgetc(fp);
+  short tst = 0;
+  
+  if(!fp) { return false; }
   else {
-    if(c == 'L'){
-      fclose(fp);
+    for (; c != EOF ; c = fgetc(fp), tst++ ) {
+      if ( tst == 0 ) { numLog = c; };
+      if ( tst == 13 ) { tst = 0; }; }; };
       
-      strcpy(cmd, "del ");
-      strcat(cmd, file);
-      system( cmd );
-        
-      strcpy(cmd, "md txt");
-      system( cmd );
-        
-      free(cmd);
-      return errinit(); }; };
+  fclose(fp);    
+  free(cmd);    
+      
+  if (numLog > 8) {
+    system("cd.. & cd txt & del *.txt");
+    return errinit(); }; 
     
-  return false; };  
+  return true; };  
 
     
         
