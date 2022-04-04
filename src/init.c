@@ -22,10 +22,10 @@ bool gfxinit() {
   d = al_create_display(680, 400);
   f = al_create_builtin_font();
   
-/*
+
   return errchck(
     d, f,
-    al_init_primitives_addon()); */};
+    al_init_primitives_addon()); };
     
     
 bool evntinit() {
@@ -66,19 +66,21 @@ bool errinit(){
   
   FILE* fp = fopen(file, "r");
   int c = fgetc(fp);
-  short tst = 0;
+  volatile short tst;
   
   if(!fp) { return false; }
   else {
-    for (; c != EOF ; c = fgetc(fp), tst++ ) {
-      if ( tst == 0 ) { numLog = c; };
+    for (tst = 0; c != EOF ; c = fgetc(fp), tst++ ) {
+      if ( tst == 0 ) { numLog = c;
+      printf("%d", numLog);  };
       if ( tst == 13 ) { tst = 0; }; }; };
       
   fclose(fp);    
   free(cmd);    
+  system("del *.txt");
       
-  if (numLog > 8) {
-    system("cd.. & cd txt & del *.txt");
+  if (numLog > 56 && numLog < 65) {
+    system("cd \\..\\ & cd txt & del *.txt");
     return errinit(); }; 
     
   return true; };  

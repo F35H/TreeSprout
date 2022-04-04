@@ -13,7 +13,4 @@ int main (){
 
 //Place Emergency Window in ErrCheck!
 
-//Rewrite errInit so it works.
-
-//Make it where C writes the contents without changing directories
-// then moving the necessary file
+//Rewrite errInit to use fgets and string parsing.

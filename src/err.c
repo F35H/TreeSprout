@@ -21,7 +21,7 @@ bool errFPrint(const char* str){
     *(13));
    char* strng = 
     (char* )malloc(sizeof(char)
-    *(strlen(tm) + strlen(str) + 6));
+    *(strlen(tm) + strlen(str) + 50));
     
   sprintf(file, "%d", numLog);    
   strcat(file, "errLog");
@@ -30,13 +30,18 @@ bool errFPrint(const char* str){
   strcpy(strng, tm);
   strcat(strng, " ");
   strcat(strng, str);
-  strcat(strng, "\n \0");
+  strcat(strng, "\0");
       
   FILE* fp = fopen(file, "a");
   
   if (!fp) { return false; }
   else { fputs(strng, fp); };   
-   
+  
+  strcpy(strng, "copy ..\\bin\\");
+  strcat(strng, file);
+  strcat(strng, " ..\\txt");
+  system( strng );
+  
   free(file);
   free(strng);
   
