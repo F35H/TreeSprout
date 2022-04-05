@@ -14,3 +14,4 @@ int main (){
 //Place Emergency Window in ErrCheck!
 
 //Rewrite errInit to use fgets and string parsing.
+

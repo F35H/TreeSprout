@@ -1,4 +1,5 @@
-#include <stdio.h>
+cd..
+cd #include <stdio.h>
 #include <stdlib.h>
 #include <allegro5/allegro5.h>
 #include <allegro5/allegro_font.h>
@@ -9,15 +10,15 @@ bool geninit();
 bool genlp();
 bool genclose(); 
   
-//Graphics
+//Allegro
 bool flip;
 
 ALLEGRO_DISPLAY* d;
 ALLEGRO_FONT* f;
 
-bool gfxinit();
-bool gfxlp();
-bool gfxclose(); 
+bool allegInit();
+bool allegLP();
+bool allegClose(); 
 
 //Evemts
 ALLEGRO_EVENT e;
