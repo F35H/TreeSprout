@@ -3,14 +3,12 @@
 int main (){
 
   if(
-  !geninit() ||
-  !genlp() ||
-  !genclose() )
+  !genInit() ||
+  !genLp() )
   { return -1; }
   else 
   { return 0; } };
 
 
-//Place Emergency Window in ErrCheck!
-
-//Rewrite errInit to use fgets and string parsing.
+//Place deletion for errlog in txt for errFprint
+//Find what is wrong so it can continue counting up

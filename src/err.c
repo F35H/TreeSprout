@@ -1,6 +1,6 @@
 #include "engDef.h"
 
-bool errchck(bool itm,...){
+bool errChck(bool itm,...){
   va_list vlist;
   va_start(vlist, itm);
   
@@ -21,23 +21,28 @@ bool errFPrint(const char* str){
     *(13));
    char* strng = 
     (char* )malloc(sizeof(char)
-    *(strlen(tm) + strlen(str) + 50));
+    *(strlen(tm) + strlen(str) + 53));
     
-  sprintf(file, "%d", numLog);    
+  sprintf(file, "%c", numLog);    
   strcat(file, "errLog");
   strcat(file, ".txt");
   
   strcpy(strng, tm);
   strcat(strng, " ");
   strcat(strng, str);
-  strcat(strng, "\0");
+  strcat(strng, "\n \0");
       
   FILE* fp = fopen(file, "a");
   
   if (!fp) { return false; }
-  else { fputs(strng, fp); };   
+  else { fputs(strng, fp);
+  fclose(fp); };   
   
-  strcpy(strng, "copy ..\\bin\\");
+  strcpy(strng, "cd.. & del /q txt\\");
+  strcat(strng, file);
+  system( strng );
+  
+  strcpy(strng, "copy  ..\\bin\\");
   strcat(strng, file);
   strcat(strng, " ..\\txt");
   system( strng );
@@ -45,6 +50,4 @@ bool errFPrint(const char* str){
   free(file);
   free(strng);
   
-  fclose(fp);
-  return true; };         
-
+    return true; };         

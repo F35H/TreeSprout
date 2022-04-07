@@ -1,38 +1,33 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <allegro5/allegro5.h>
-#include <allegro5/allegro_font.h>
-#include <allegro5/allegro_primitives.h>
+#include <stdbool.h>
+#include <string.h>
+#include <stdarg.h>
+#include <time.h>
+
+#include <SFML/Window.h>
+#include <SFML/Graphics.h>
 
 //General
-bool geninit();
-bool genlp();
-bool genclose(); 
+bool genInit();
+bool genLp();
+bool genClose(); 
   
 //Graphics
-bool flip;
+sfRenderWindow* wind;
 
-ALLEGRO_DISPLAY* d;
-ALLEGRO_FONT* f;
-
-bool gfxinit();
-bool gfxlp();
-bool gfxclose(); 
+bool gfxInit();
+bool gfxLp(); 
 
 //Evemts
-ALLEGRO_EVENT e;
   
-ALLEGRO_TIMER* t;
-ALLEGRO_EVENT_QUEUE* q;
-  
-bool evntinit();
-bool evntlp();
-bool evntclose(); 
+bool evntInit();
+bool evntLp();
 
 //Error Handling
 short numLog;
 
-bool errinit(); 
-bool  errchck(bool itm,...);
+bool errInit(); 
+bool  errChck(bool itm,...);
 bool  errFPrint(const char* str);
   

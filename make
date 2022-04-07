@@ -1,7 +1,7 @@
-LINKER = -LG:\Dev\CPP\TreeSprout\lib -lallegro.dll -lallegro_font.dll -lallegro_image.dll -lallegro_primitives.dll -lallegro_acodec.dll -lallegro_audio.dll
+LINKER = -LG:\Dev\CPP\TreeSprout\lib -lcsfml-window -lcsfml-graphics -std=c11 
 INCLUDE = -IG:\Dev\CPP\TreeSprout\include -IG:\Dev\CPP\TreeSprout\heads
 BINARY = -BG:\Dev\CPP\TreeSprout\bin
-CPP = main.c src/init.c src/close.c src/err.c src/lp.c
+CPP = main.c src/init.c src/err.c src/lp.c
 OUT = bin/game.exe
 
 BFRCMDS = cls
