@@ -1,4 +1,4 @@
-LINKER = -LG:\Dev\CPP\TreeSprout\lib -lcsfml-window -lcsfml-graphics -std=c11 
+LINKER = -LG:\Dev\CPP\TreeSprout\lib -lcsfml-window -lcsfml-graphics -lpthread -std=c11 
 INCLUDE = -IG:\Dev\CPP\TreeSprout\include -IG:\Dev\CPP\TreeSprout\heads
 BINARY = -BG:\Dev\CPP\TreeSprout\bin
 CPP = main.c src/init.c src/err.c src/lp.c

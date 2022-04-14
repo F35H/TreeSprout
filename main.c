@@ -9,6 +9,5 @@ int main (){
   else 
   { return 0; } };
 
-
-//Place deletion for errlog in txt for errFprint
-//Find what is wrong so it can continue counting up
+//Fix error print to remove the errLog from bin by copying
+//from txt file before appending, recopying, then deleteing

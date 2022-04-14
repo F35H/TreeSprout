@@ -11,6 +11,17 @@ bool errChck(bool itm,...){
     
   return true; };
 
+bool errTPrint(const char* str){
+  thrd_t* thrd;
+  short t = thrd_create(thrd,errFprint,str)
+  switch(t){
+  default: return true;
+  break;
+  case thrd_error:
+  case thrd_nomem:
+  return false;
+  break; }; };
+
 bool errFPrint(const char* str){
   time_t t = time(NULL);
   const char* tm = 
@@ -38,16 +49,16 @@ bool errFPrint(const char* str){
   else { fputs(strng, fp);
   fclose(fp); };   
   
-  strcpy(strng, "cd.. & del /q txt\\");
+  strcpy(strng, "cd  \"..\"  & del /q txt\\");
   strcat(strng, file);
   system( strng );
   
-  strcpy(strng, "copy  ..\\bin\\");
+  strcpy(strng, "copy \"..\\bin\\");
   strcat(strng, file);
-  strcat(strng, " ..\\txt");
+  strcat(strng, "\"  \"..\\txt\"");
   system( strng );
   
   free(file);
   free(strng);
   
-    return true; };         
+  return true; };         
