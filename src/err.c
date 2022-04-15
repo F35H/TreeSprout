@@ -12,17 +12,16 @@ bool errChck(bool itm,...){
   return true; };
 
 bool errTPrint(const char* str){
-  thrd_t* thrd;
-  short t = thrd_create(thrd,errFprint,str)
-  switch(t){
-  default: return true;
-  break;
-  case thrd_error:
-  case thrd_nomem:
-  return false;
-  break; }; };
+  void* vd = (void*)str;
+  pthread_t* thrd = malloc(sizeof(pthread_t));
+  short t = pthread_create(thrd,NULL,errFPrint,vd);
+  if (t == 0){
+  return true; };
+  return false; };
 
-bool errFPrint(const char* str){
+void* errFPrint(void* vd){
+  const char* str = (const char *)vd;
+
   time_t t = time(NULL);
   const char* tm = 
     asctime(gmtime(&t));
@@ -32,7 +31,7 @@ bool errFPrint(const char* str){
     *(13));
    char* strng = 
     (char* )malloc(sizeof(char)
-    *(strlen(tm) + strlen(str) + 53));
+    *(strlen(tm) + strlen(str) + 6));
     
   sprintf(file, "%c", numLog);    
   strcat(file, "errLog");
@@ -45,7 +44,7 @@ bool errFPrint(const char* str){
       
   FILE* fp = fopen(file, "a");
   
-  if (!fp) { return false; }
+  if (!fp) { return vd; }
   else { fputs(strng, fp);
   fclose(fp); };   
   
@@ -61,4 +60,4 @@ bool errFPrint(const char* str){
   free(file);
   free(strng);
   
-  return true; };         
+  return vd; };         

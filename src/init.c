@@ -1,41 +1,49 @@
 #include "engDef.h"
 
 bool genInit(){
-  if(!errInit())
-    { return false; };
-
   p = malloc(sizeof(plyr));
-  p->vlcty = 50;
-  p->pos.x = 50.0f;
-  p->pos.y = 50.0f;
-  p->size.x = 5;
-  p->size.y = 5;
+  w = malloc(sizeof(win));
   
-  p->sprite = sfRectangleShape_create();
-  
-  move = false;
+  if(!errInit())
+    { return false; };  
   
   return errChck(
-    gfxInit(),
-    evntInit() ); };
+    evntInit(),
+    gfxInit() ); };
         
 bool gfxInit() {
   errTPrint("Initializing Graphics - File: Init.c");
   
-  sfVideoMode vM = {800, 600, 8};
-    
+  w->vM.width = 800;
+  w->vM.height = 600;
+  w->vM.bitsPerPixel = 8;
+  
   wind = sfRenderWindow_create(
-    vM, "TreeSprout",
+    w->vM, "TreeSprout",
     sfDefaultStyle,
     sfContextDefault);    
- 
+
+  p->sprite = sfRectangleShape_create();
+  
   return errChck(
     wind ); };
     
 bool evntInit() {
   errTPrint("Initializing Events - File: Init.c");         
            
-    return true;  };
+  move = false;
+  
+  p->vlcty = 2;
+  p->pos.x = ((w->vM.width)*0.5f);
+  p->pos.y = ((w->vM.height)*0.75f);
+  
+  p->nPos.x = 0.0f;
+  p->nPos.y = 0.0f;
+  
+  p->size.x = 5;
+  p->size.y = 5;
+           
+  return true;  };
     
 bool errInit(){
   const char* file  = "temp.txt";
