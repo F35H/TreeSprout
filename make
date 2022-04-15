@@ -1,7 +1,14 @@
 LINKER = -LG:\Dev\CPP\TreeSprout\lib -lcsfml-window -lcsfml-graphics -lpthread -std=c11 
 INCLUDE = -IG:\Dev\CPP\TreeSprout\include -IG:\Dev\CPP\TreeSprout\heads
 BINARY = -BG:\Dev\CPP\TreeSprout\bin
-CPP = main.c src/init.c src/err.c src/lp.c src/cdn.c
+
+ifdef OS
+	CPP = main.c src/init.c src/winErr.c src/lp.c src/cdn.c
+else
+	CPP = main.c src/init.c src/uniErr.c src/lp.c src/cdn.c
+	
+endif
+
 OUT = bin/game.exe
 
 BFRCMDS = cls
@@ -36,3 +43,7 @@ gdb:
 noop:
 	$(BFRCMDS)
 	gcc -o $(OUT) $(CPP) $(INCLUDE) $(LINKER) $(BINARY) -Wall -pipe
+
+precomp: 
+	$(BFRCMDS)
+	gcc -o heads/libs.h.gch heads/libs.h $(INCLUDE)
