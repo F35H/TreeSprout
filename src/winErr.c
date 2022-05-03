@@ -1,13 +1,9 @@
 #include "engDef.h"
 
-bool errChck(bool itm,...){
-  va_list vlist;
-  va_start(vlist, itm);
-  
-  for(short i = 0; i < itm; i++){ 
-    if(!va_arg(vlist, int)){
-    errFPrint("ERROR: Check last Callback!");
-    return false; } };
+bool errChck(bool fn){  
+  if(!fn){
+  errFPrint("ERROR: Check last Callback!");
+  return false; };
     
   return true; };
 

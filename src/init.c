@@ -3,13 +3,13 @@
 bool genInit(){
   p = malloc(sizeof(plyr));
   w = malloc(sizeof(win));
-  
-  if(!errInit())
-    { return false; };  
-  
-  return errChck(
-    evntInit(),
-    gfxInit() ); };
+  cllsn = malloc(sizeof(sfVector3f));
+        
+ if( !errChck( errInit() ))
+   { return false; };
+ if( !errChck( gfxInit() ))
+   { return false; };
+ return  errChck( evntInit() );  };
         
 bool gfxInit() {
   errTPrint("Initializing Graphics - File: Init.c");
@@ -17,7 +17,7 @@ bool gfxInit() {
   w->vM.width = 800;
   w->vM.height = 600;
   w->vM.bitsPerPixel = 8;
-  
+    
   wind = sfRenderWindow_create(
     w->vM, "TreeSprout",
     sfDefaultStyle,
@@ -30,19 +30,30 @@ bool gfxInit() {
     
 bool evntInit() {
   errTPrint("Initializing Events - File: Init.c");         
+               
+  cl = sfClock_create();         
+  
+  cllsn->x = ((w->vM.width)*0.05f); //left
+  cllsn->y = ((w->vM.width)*0.95f); //right
+  cllsn->z = ((w->vM.height)*0.75f); //ground
            
   move = false;
-  
-  p->vlcty = 2;
+  jump = false;
+    
+  p->vlcty = 5;
   p->pos.x = ((w->vM.width)*0.5f);
   p->pos.y = ((w->vM.height)*0.75f);
   
+  p->pPos = p->pos;
+    
   p->nPos.x = 0.0f;
   p->nPos.y = 0.0f;
   
   p->size.x = 5;
   p->size.y = 5;
-           
+  
+  
+             
   return true;  };
     
 bool errInit(){
@@ -64,7 +75,7 @@ bool errInit(){
   int c = fgetc(fp);
   volatile short tst;
   
-  if(!fp) { return false; }
+  if(!fp) {  return false; }
   else if(feof(fp)) { numLog = 48; }
   else {
     for (tst = 0; !feof(fp) ; c = fgetc(fp), tst++ ) {

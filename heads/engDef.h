@@ -1,5 +1,6 @@
 #include "libs.h"
 
+
 //Window
 typedef struct window {
   sfVideoMode vM; 
@@ -7,9 +8,10 @@ typedef struct window {
 
 //Player
 typedef struct player {
-  short vlcty;
+  float vlcty;
   sfVector2f pos;
   sfVector2f nPos;
+  sfVector2f pPos;
   
   sfVector2f size;
   sfRectangleShape* sprite; }
@@ -21,7 +23,9 @@ bool genLp();
 bool genClose();
 
 win* w;
-plyr* p;    
+plyr* p;
+
+sfVector3f* cllsn;    
 
 //Graphics
 sfRenderWindow* wind;
@@ -32,6 +36,8 @@ bool gfxCdn();
 
 //Evemts
 bool move;
+bool jump;
+sfClock* cl;
 
 bool evntInit();
 bool evntLp();
@@ -41,7 +47,7 @@ bool evntCdn();
 short numLog;
 
 bool errInit(); 
-bool  errChck(bool itm,...);
+bool  errChck(bool fn);
 bool errTPrint(const char*  str);
 void*  errFPrint(void* str);
   

@@ -1,17 +1,10 @@
 #include "engDef.h"
 
 bool genLp(){
-  if (sfRenderWindow_isOpen(
-  wind) ){
-  
-    if (errChck(
-    evntLp(),
-    gfxLp() ) )
-      { genLp(); }
-    else
-      { return false; }; };
-  
-  return true; };
+  while(sfRenderWindow_isOpen(wind)){
+    if (!errChck(gfxLp())){ break; }
+    if (!errChck(evntLp())){ break; } };  
+  return false; };
 
 bool evntLp(){
   sfEvent e;
@@ -19,8 +12,8 @@ bool evntLp(){
  if(sfRenderWindow_pollEvent(wind,&e)){     
    switch(e.type){   
      case sfEvtClosed: {
-     sfRenderWindow_close(
-       wind); } break;
+       sfRenderWindow_close(
+         wind); } break;
        
      case sfEvtLostFocus: {
      } break;
@@ -30,8 +23,10 @@ bool evntLp(){
        
      case sfEvtKeyPressed:     
      case sfEvtKeyReleased: {
-     return errChck( evntCdn(e) ); }
-     break; }; }; };
+       return errChck( evntCdn(e) ); }
+       break; }; }; 
+     
+ return true; };
     
 bool gfxLp(){
   sfRenderWindow_clear(wind, sfBlack);
