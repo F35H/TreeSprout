@@ -40,15 +40,15 @@ bool evntInit() {
   move = false;
   jump = false;
     
-  p->vlcty = 5;
+  p->vlcty = 2;
   p->pos.x = ((w->vM.width)*0.5f);
   p->pos.y = ((w->vM.height)*0.75f);
   
-  p->pPos = p->pos;
-    
+  p->pPos = p->pos;  
+  
   p->nPos.x = 0.0f;
   p->nPos.y = 0.0f;
-  
+    
   p->size.x = 5;
   p->size.y = 5;
   

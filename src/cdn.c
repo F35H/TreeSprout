@@ -1,19 +1,17 @@
 #include "engDef.h"
 
 bool gfxCdn(){
-  
- if ( p->pos.x <= cllsn->x){ move = false; p->pos.x = ( cllsn->x + 1 ); };
- if ( p->pos.x >= cllsn->y){ move = false; p->pos.x = ( cllsn->y  - 1); };
-
-
   if (move == true){
-    if (jump == true){
-      if (p->pos.y >= cllsn->z){ jump = false; p->pos.y = (cllsn->z + 1); 
-       p->nPos.y = (((pow((p->nPos.x - p->pPos.x), 2))/5)+ cllsn->z); };
     sfRectangleShape_move(p->sprite, p->nPos); 
-    p->pos = sfRectangleShape_getPosition(p->sprite); };                
-                  
+    p->pos = sfRectangleShape_getPosition(p->sprite); };
+
+  if ( p->pos.x <= cllsn->x)
+    { p->pos.x = ( cllsn->x + 1 ); return true; };
+  if ( p->pos.x >= cllsn->y)
+    { p->pos.x = ( cllsn->y  - 1); return true;};
+
   sfRectangleShape_setPosition(p->sprite, p->pos );
+    
   return true; };
 
 bool evntCdn(sfEvent e){
@@ -32,9 +30,9 @@ bool evntCdn(sfEvent e){
        p->nPos.x = p->vlcty; }
      break; 
      case sfKeySpace:
+       if (jump == false){p->pPos = p->pos; };
        jump = true;
        move = true;
-       p->pPos = p->pos;
      break; };   
        
   return true;
