@@ -14,8 +14,8 @@ bool genInit(){
 bool gfxInit() {
   errTPrint("Initializing Graphics - File: Init.c");
   
-  w->vM.width = 800;
-  w->vM.height = 600;
+  w->vM.width = 1800;
+  w->vM.height = 1000;
   w->vM.bitsPerPixel = 8;
     
   wind = sfRenderWindow_create(
@@ -49,8 +49,8 @@ bool evntInit() {
   p->nPos.x = 0.0f;
   p->nPos.y = 0.0f;
     
-  p->size.x = 5;
-  p->size.y = 5;
+  p->size.x = 30;
+  p->size.y = 30;
   
   
              
