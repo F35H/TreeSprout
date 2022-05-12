@@ -13,50 +13,38 @@ bool evntLp(){
    switch(e.type){   
      case sfEvtClosed: {
        sfRenderWindow_close(
-         wind); } break;
+         wind);
+         return true; } 
        
-     case sfEvtLostFocus: {
-     } break;
+     case sfEvtLostFocus: 
+       { return true; } 
        
-     case sfEvtGainedFocus: {
-     } break;
+     case sfEvtGainedFocus: 
+       { return true; }
        
      case sfEvtKeyPressed:
        {move = true; }
        break;
             
      case sfEvtKeyReleased: 
-       { move = false; }
-       break; };
+       { move = false;
+       return true; } } };
        
-   switch(e){
+   switch(e.key.code){
      case sfKeyA:     
      case sfKeyLeft: {
-       move = true;
        p->nPos.x =-( p->vlcty); } 
        break;
+       
      case sfKeyD:
      case sfKeyRight:{ 
-       move = true;
        p->nPos.x = p->vlcty; }
        break; 
+       
      case sfKeySpace: {
        if (jump == false)
          {p->pPos = p->pos; };
-       jump = true;
-       move = true; } 
-       break;
-     case sfKeyA: 
-       { move = false; }
-       break;
-     case sfKeyD: 
-       { move = false; }
-       break;
-     case sfKeyLeft: 
-       { move = false; }
-       break;
-     case sfKeyRight: 
-       { move = false; }
+       jump = true; } 
        break; }; 
      
  return true; };
@@ -76,14 +64,14 @@ bool gfxLp(){
   sfRectangleShape_setPosition(p->sprite, p->pos );
     
        
-  const sfRenderStates* s;
+  const sfRenderStates* state;
   
   sfRectangleShape_setSize(p->sprite, p->size);
   sfRectangleShape_setFillColor(p->sprite, sfRed);
   
-  sfRenderWindow_drawRectangleShape(wind,p->sprite,s);
-  
+  sfRenderWindow_drawRectangleShape(wind,s->grnd,state);
+  sfRenderWindow_drawRectangleShape(wind,p->sprite,state);
+    
   sfRenderWindow_display(wind);
-
   
   return true; };

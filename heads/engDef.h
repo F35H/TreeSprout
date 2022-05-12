@@ -1,27 +1,13 @@
-#include "libs.h"
+#include "genTypes.h"
+//#include "treeTypes.h"
+#include "sorts.h"
 
-
-//Window
-typedef struct window {
-  sfVideoMode vM; 
-} win; 
-
-//Player
-typedef struct player {
-  float vlcty;
-  sfVector2f pos;
-  sfVector2f nPos;
-  sfVector2f pPos;
-  
-  sfVector2f size;
-  sfRectangleShape* sprite; }
-  plyr;
-  
 //General
 bool genInit();
 bool genLp();
 bool genClose();
 
+scn* s;
 win* w;
 plyr* p;
 
@@ -32,7 +18,6 @@ sfRenderWindow* wind;
 
 bool gfxInit();
 bool gfxLp(); 
-bool gfxCdn();
 
 //Evemts
 bool move;
@@ -41,10 +26,9 @@ sfClock* cl;
 
 bool evntInit();
 bool evntLp();
-bool evntCdn();
 
 //Error Handling
-short numLog;
+char numLog;
 
 bool errInit(); 
 bool  errChck(bool fn);

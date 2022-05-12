@@ -3,6 +3,7 @@
 bool genInit(){
   p = malloc(sizeof(plyr));
   w = malloc(sizeof(win));
+  s = malloc(sizeof(scn)); 
   cllsn = malloc(sizeof(sfVector3f));
         
  if( !errChck( errInit() ))
@@ -25,8 +26,20 @@ bool gfxInit() {
 
   p->sprite = sfRectangleShape_create();
   
-  return errChck(
-    wind ); };
+  s->grnd = sfRectangleShape_create();
+  sfTexture* tempTex = sfTexture_createFromFile(
+    "img/120px-Ground_(front_layer).png",NULL);
+  
+  if (!tempTex)
+    { errTPrint(
+    "Failed Texture Init");
+    return false;}
+    
+  sfRectangleShape_setTexture(s->grnd,tempTex,true);
+  
+  if (!errChck(wind))
+    { return false; };  
+  return true; };
     
 bool evntInit() {
   errTPrint("Initializing Events - File: Init.c");         
@@ -62,18 +75,19 @@ bool errInit(){
   char* cmd = 
     ( char* )malloc(sizeof(char*)
     *(25 + sizeof(file)));
-     
-  strcpy(cmd, "cd \"..\" & md txt");
-  system( cmd );
+
+  chdir("..");
   
+  mkdir("txt");     
+       
   strcpy(cmd, 
-    "cd \"..\" & dir txt /b >> bin/");
+    "dir txt /b >> ");
   strcat(cmd, file);
   system( cmd ); 
   
   FILE* fp = fopen(file, "r");
   int c = fgetc(fp);
-  volatile short tst;
+  short tst;
   
   if(!fp) {  return false; }
   else if(feof(fp)) { numLog = 48; }
@@ -88,7 +102,9 @@ bool errInit(){
   system("del *.txt");
       
   if (numLog > 56) {
-    system("cd \"..\" & del /q txt");
+    system("del /q txt");
     return errInit(); }; 
     
   return true; };  
+  
+  

@@ -22,14 +22,14 @@ void* errFPrint(void* vd){
   const char* tm = 
     asctime(gmtime(&t));
   
-   char* file = 
-    (char* )malloc(sizeof(char)
-    *(13));
-   char* strng = 
-    (char* )malloc(sizeof(char)
+  char* file = malloc(sizeof(char)
+    *(17));
+  char* strng = 
+    malloc(sizeof(char)
     *(strlen(tm) + strlen(str) + 6));
-    
-  sprintf(file, "%c", numLog);    
+  
+  strcpy(file, "txt/");
+  strcat(file, &numLog);    
   strcat(file, "errLog");
   strcat(file, ".txt");
   
@@ -43,16 +43,7 @@ void* errFPrint(void* vd){
   if (!fp) { return vd; }
   else { fputs(strng, fp);
   fclose(fp); };   
-  
-  strcpy(strng, "cd  \"..\"  & del /q txt\\");
-  strcat(strng, file);
-  system( strng );
-  
-  strcpy(strng, "copy \"..\\bin\\");
-  strcat(strng, file);
-  strcat(strng, "\"  \"..\\txt\"");
-  system( strng );
-  
+      
   free(file);
   free(strng);
   

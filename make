@@ -3,9 +3,9 @@ INCLUDE = -IG:\Dev\CPP\TreeSprout\include -IG:\Dev\CPP\TreeSprout\heads
 BINARY = -BG:\Dev\CPP\TreeSprout\bin
 
 ifdef OS
-	CPP = main.c src/init.c src/winErr.c src/lp.c src/cdn.c
+	CPP = main.c src/init.c src/winErr.c src/lp.c src/sorts/bubbSorts.c src/sorts/treeSorts.c
 else
-	CPP = main.c src/init.c src/uniErr.c src/lp.c src/cdn.c 
+	CPP = main.c src/init.c src/uniErr.c src/lp.c  
 	
 endif
 
