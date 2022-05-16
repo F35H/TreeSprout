@@ -1,16 +1,17 @@
+#define SORT_NUM 499
 
 inline void swap(int* (*arr)[499], int indOne,int indTwo){
   int* num = *arr[indOne];
   *arr[indOne] = *arr[indTwo];      
   *arr[indTwo] = num; }; 
   
-  void bubbleSort(int* (*arr)[499]);
-  void cocktailSort(int* (*arr)[499]);
-  void combSort(int* (*arr)[499]);
-  void oddEvenSort(int* (*arr)[499]);
+  void bubbleSort(int* (*arr)[SORT_NUM]);
+  void cocktailSort(int* (*arr)[SORT_NUM]);
+  void combSort(int* (*arr)[SORT_NUM]);
+  void oddEvenSort(int* (*arr)[SORT_NUM]);
   
-  void insertSort(int* (*arr)[499]);
-  void gnomeSort(int* (*arr)[499]);
-  void librarySort(int* (*arr)[499]);
-  void patienceSort(int* (*arr)[499]);
-  void shellSort(int* (*arr)[499]);
+  void insertSort(int* (*arr)[SORT_NUM]);
+  void gnomeSort(int* (*arr)[SORT_NUM]);
+  void librarySort(int* (*arr)[SORT_NUM]);
+  void patienceSort(int* (*arr)[SORT_NUM]);
+  void shellSort(int* (*arr)[SORT_NUM]);

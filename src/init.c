@@ -73,7 +73,7 @@ bool errInit(){
   const char* file  = "temp.txt";
      
   char* cmd = 
-    ( char* )malloc(sizeof(char*)
+    malloc(sizeof(char*)
     *(25 + sizeof(file)));
 
   chdir("..");
