@@ -31,19 +31,21 @@ bool evntLp(){
        return true; } } };
        
    switch(e.key.code){
-     case sfKeyA:     
-     case sfKeyLeft: {
-       p->nPos.x =-( p->vlcty); } 
+     case sfKeyD:     
+     case sfKeyRight: {
+       grnd->nPos.x =-( grnd->vlcty); 
+       plyr->nPos.x = grnd->vlcty; } 
        break;
        
-     case sfKeyD:
-     case sfKeyRight:{ 
-       p->nPos.x = p->vlcty; }
+     case sfKeyA:
+     case sfKeyLeft:{ 
+       grnd->nPos.x = grnd->vlcty;
+       plyr->nPos.x = -( plyr->vlcty); }
        break; 
        
      case sfKeySpace: {
        if (jump == false)
-         {p->pPos = p->pos; };
+         {grnd->pPos = grnd->pos; };
        jump = true; } 
        break; }; 
      
@@ -51,26 +53,41 @@ bool evntLp(){
     
 bool gfxLp(){
   sfRenderWindow_clear(wind, sfBlack);
-  
+  /*
   if (move == true){
-    sfRectangleShape_move(p->sprite, p->nPos); 
-    p->pos = sfRectangleShape_getPosition(p->sprite); };
-  
-  if ( p->pos.x <= cllsn->x)
-    { p->pos.x = ( cllsn->x + 1 ); return true; };
-  if ( p->pos.x >= cllsn->y)
-    { p->pos.x = ( cllsn->y  - 1); return true;};
+    if ( grnd->pos.x <= grnd->cllsn.x ||
+    grnd->pos.x >= grnd->cllsn.y){
+      sfRectangleShape_move(plyr->sprite, plyr->nPos); 
+      grnd->pos = sfRectangleShape_getPosition(plyr->sprite); }
+    else{
+      sfRectangleShape_move(grnd->sprite, grnd->nPos); 
+      grnd->pos = sfRectangleShape_getPosition(grnd->sprite);  } };
+*/
 
-  sfRectangleShape_setPosition(p->sprite, p->pos );
+    if( grnd->pos.x <= grnd->cllsn.x ||
+    grnd->pos.x >= grnd->cllsn.y){
+     sfRectangleShape_move(grnd->sprite, grnd->nPos); 
+     grnd->pos = sfRectangleShape_getPosition(grnd->sprite); };
+
+  if ( plyr->pos.x <= plyr->cllsn.x)
+    { plyr->pos.x = ( plyr->cllsn.x + 1 ); return true; };
+  if ( plyr->pos.x >= plyr->cllsn.y)
+    { plyr->pos.x = ( plyr->cllsn.y - 1); return true;};
+
+
+  sfRectangleShape_setPosition(grnd->sprite, grnd->pos );
+  sfRectangleShape_setPosition(plyr->sprite, plyr->pos );
     
        
   const sfRenderStates* state;
   
-  sfRectangleShape_setSize(p->sprite, p->size);
-  sfRectangleShape_setFillColor(p->sprite, sfRed);
+  sfRectangleShape_setSize(plyr->sprite, plyr->size);
+  sfRectangleShape_setFillColor(plyr->sprite, sfRed);
   
-  sfRenderWindow_drawRectangleShape(wind,s->grnd,state);
-  sfRenderWindow_drawRectangleShape(wind,p->sprite,state);
+  sfRectangleShape_setSize(grnd->sprite, grnd->size);
+  
+  sfRenderWindow_drawRectangleShape(wind,grnd->sprite,state);
+  sfRenderWindow_drawRectangleShape(wind,plyr->sprite,state);
     
   sfRenderWindow_display(wind);
   

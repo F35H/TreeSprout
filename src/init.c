@@ -1,11 +1,12 @@
 #include "engDef.h"
 
 bool genInit(){
-  p = malloc(sizeof(plyr));
+  plyr = malloc(sizeof(sprite));
+  grnd = malloc(sizeof(sprite));
+//  sky = malloc(sizeof(sprite));
+  
   w = malloc(sizeof(win));
-  s = malloc(sizeof(scn)); 
-  cllsn = malloc(sizeof(sfVector3f));
-        
+          
  if( !errChck( errInit() ))
    { return false; };
  if( !errChck( gfxInit() ))
@@ -24,9 +25,9 @@ bool gfxInit() {
     sfDefaultStyle,
     sfContextDefault);    
 
-  p->sprite = sfRectangleShape_create();
+  plyr->sprite = sfRectangleShape_create();
+  grnd->sprite = sfRectangleShape_create();
   
-  s->grnd = sfRectangleShape_create();
   sfTexture* tempTex = sfTexture_createFromFile(
     "img/120px-Ground_(front_layer).png",NULL);
   
@@ -35,7 +36,15 @@ bool gfxInit() {
     "Failed Texture Init");
     return false;}
     
-  sfRectangleShape_setTexture(s->grnd,tempTex,true);
+  sfRectangleShape_setTexture(
+    grnd->sprite,tempTex,true); 
+  
+  setSpriteSize(plyr, 30, 30);
+  setSpriteSize(grnd, 
+    ((w->vM.width * 3)), 
+    w->vM.height);
+    
+   sfRectangleShape_setOrigin();
   
   if (!errChck(wind))
     { return false; };  
@@ -46,27 +55,23 @@ bool evntInit() {
                
   cl = sfClock_create();         
   
-  cllsn->x = ((w->vM.width)*0.05f); //left
-  cllsn->y = ((w->vM.width)*0.95f); //right
-  cllsn->z = ((w->vM.height)*0.75f); //ground
-           
   move = false;
-  jump = false;
+  jump = false;    
     
-  p->vlcty = 2;
-  p->pos.x = ((w->vM.width)*0.5f);
-  p->pos.y = ((w->vM.height)*0.75f);
-  
-  p->pPos = p->pos;  
-  
-  p->nPos.x = 0.0f;
-  p->nPos.y = 0.0f;
+  setSpritePos(plyr, 
+  (w->vM.width * 0.5), 
+  (w->vM.height * 0.75), 2);
     
-  p->size.x = 30;
-  p->size.y = 30;
+  setSpritePos(grnd, 0, 0, plyr->vlcty);  
+    
+  setSpriteCllsn(plyr,    
+    ((w->vM.width)*0.05f),
+    ((w->vM.width)*0.95), 0);  
+    
+  setSpriteCllsn(grnd,     
+    ((w->vM.width)*0.165f),
+    ((w->vM.width)*0.825f), 0);  
   
-  
-             
   return true;  };
     
 bool errInit(){
@@ -106,5 +111,5 @@ bool errInit(){
     return errInit(); }; 
     
   return true; };  
-  
+    
   

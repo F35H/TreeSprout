@@ -1,5 +1,7 @@
-#include "genTypes.h"
+#include "genInline.h"
+
 //#include "treeTypes.h"
+
 #include "sorts.h"
 
 //General
@@ -7,11 +9,10 @@ bool genInit();
 bool genLp();
 bool genClose();
 
-scn* s;
-win* w;
-plyr* p;
+sprite* plyr;
+sprite* grnd;
 
-sfVector3f* cllsn;    
+win* w;
 
 //Graphics
 sfRenderWindow* wind;
@@ -26,6 +27,13 @@ sfClock* cl;
 
 bool evntInit();
 bool evntLp();
+
+bool spriteEvntInit(
+  sprite* s, int sizeX, 
+  int sizeY, int posX, 
+  int posY, int vlcty, 
+  int colX, int colY, 
+  int colZ);
 
 //Error Handling
 char numLog;

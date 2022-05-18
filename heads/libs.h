@@ -6,6 +6,7 @@
 #include <time.h>
 #include <math.h>
 #include <pthread.h>
+#include <sys/stat.h>
 
 #include <SFML/Window.h>
 #include <SFML/Graphics.h>
