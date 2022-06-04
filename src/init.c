@@ -45,6 +45,7 @@ bool gfxInit() {
     w->vM.height);
     
    sfRectangleShape_setOrigin();
+   sfRectangleShape_setOrigin();
   
   if (!errChck(wind))
     { return false; };  

@@ -10,7 +10,7 @@ bool errChck(bool fn){
 bool errTPrint(const char* str){
   void* vd = (void*)str;
   pthread_t* thrd = malloc(sizeof(pthread_t));
-  short t = pthread_create(thrd,NULL,errFPrint,vd);
+  int t = pthread_create(thrd,NULL,errFPrint,vd);
   if (t == 0){
   return true; };
   return false; };

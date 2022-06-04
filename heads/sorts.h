@@ -1,6 +1,6 @@
 #define SORT_NUM 499
 
-inline void swap(int* (*arr)[499], int indOne,int indTwo){
+inline void swap(int* (*arr)[SORT_NUM], int indOne,int indTwo){
   int* num = *arr[indOne];
   *arr[indOne] = *arr[indTwo];      
   *arr[indTwo] = num; }; 

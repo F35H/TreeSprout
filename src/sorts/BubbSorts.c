@@ -1,20 +1,20 @@
 #include "sorts.h"
 
-void bubbleSort(int* (*arr)[499]){
-  short n = 0;
-  short i = 0;  
+void bubbleSort(int* (*arr)[SORT_NUM]){
+  size_t n = 0;
+  size_t i = 0;  
 
-  for (; n < (498); n++){
-    for (; i < 498; ++i){
+  for (; n < (SORT_NUM  - 1); n++){
+    for (; i < (SORT_NUM - 1); ++i){
       if (**arr[i - 1] > **arr[i]){
         swap(arr, i, (i-1)); } } } };
        
-void cocktailSort(int* (*arr)[499]){
-  short n = 0;
-  short i = 0;  
+void cocktailSort(int* (*arr)[SORT_NUM]){
+  size_t n = 0;
+  size_t i = 0;  
 
-  for (; n < (498); n++){
-    for (; i < 498; ++i){
+  for (; n < (SORT_NUM - 1); n++){
+    for (; i < (SORT_NUM - 1); ++i){
       if (**arr[i - 1] > **arr[i]){
         swap(arr, i, (i-1)); } }
           
@@ -22,25 +22,26 @@ void cocktailSort(int* (*arr)[499]){
       if (**arr[i] > **arr[i - 1]){
         swap(arr, i, (i-1)); } } } };
       
-void combSort(int* (*arr)[499]){
-  short n = 0;
-  short i = 0;
-  short j = 250;
+void combSort(int* (*arr)[SORT_NUM]){
+  size_t n = 0;
+  size_t i = 0;
+  size_t j = 250;
   
-  for(;n < (498); n++){
-    for (; i < 498; ++i, j--){
+  for(;n < (SORT_NUM - 1); n++){
+    for (; i < (SORT_NUM -1); ++i){
       if (**arr[i] > **arr[j]){
-        swap(arr, i, j); } } } };
+        swap(arr, i, j);
+        j--; } } } };
 
- void oddEvenSort(int* (*arr)[499]){
-  short i = 0;  
-  short n = 0;  
+ void oddEvenSort(int* (*arr)[SORT_NUM]){
+  size_t i = 0;  
+  size_t n = 0;  
 
-  for (; n < (498); n++){
-    for (; i < 498; i += 2){
+  for (; n < (SORT_NUM - 1); n++){
+    for (; i < (SORT_NUM - 1); i += 2){
       if (**arr[i + 1] > **arr[i]){
         swap(arr, i, (i+1)); } }
           
-    for (i = 1; i < 498; i += 2){
+    for (i = 1; i < (SORT_NUM - 1); i += 2){
       if (**arr[i] > **arr[i + 1]){
         swap(arr, i, (i+1)); } } } };
